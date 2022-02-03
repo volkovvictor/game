@@ -46,9 +46,6 @@ const startGame = function(min, max) {
       };
 
       if(count) {
-         //console.log(count);
-         //console.log(randomNum);
-         
          const playerNum = prompt('Угадай число от 1 до 100');
          guessTheNumber(playerNum);
       } else {
