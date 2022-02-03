@@ -5,13 +5,12 @@ const isNumber = function(num) {
 };
 
 const startGame = function(min, max) {
-   const randomNum = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+   const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+   let count = 10;
 
    const playing = function(num) {
-      const playerNum = prompt(`Угадайте число от ${min} до ${max}`);
-      
-      const guessTheNumber = function() {
-      
+
+      const guessTheNumber = function(playerNum) {
          if (playerNum === null) {
             alert('Игра окончена');
             return;
@@ -26,23 +25,41 @@ const startGame = function(min, max) {
                } else {
                if  (playerNum < num) {
                   alert('Загаданное число больше');
+                  --count;
+                  
                   playing(randomNum);
                }
                if (playerNum > num) {
                   alert('Загаданное число меньше');
+                  --count;
                   playing(randomNum);
                }
                if (+playerNum === num) {
-                  alert('Поздравляю, Вы угадали!!!');
-                  return;
+                  const continueGame = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+
+                  if(continueGame) {
+                     startGame(min, max);
+                  } else return;
                }
             }
          }
       };
-      
-      guessTheNumber();
-   };
 
+      if(count) {
+         //console.log(count);
+         //console.log(randomNum);
+         
+         const playerNum = prompt('Угадай число от 1 до 100');
+         guessTheNumber(playerNum);
+      } else {
+         const continueGame = confirm('Попытки закончились, хотите сыграть еще?');
+
+            if(continueGame) {
+               startGame(min, max);
+            }
+      }
+   };
+   
    playing(randomNum);
 };
 
