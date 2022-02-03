@@ -5,11 +5,11 @@ const isNumber = function(num) {
 };
 
 const startGame = function(min, max) {
-   const randomNum = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+   const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
    const playing = function(num) {
       const playerNum = prompt(`Угадайте число от ${min} до ${max}`);
-      
+
       const guessTheNumber = function() {
       
          if (playerNum === null) {
